@@ -5,7 +5,9 @@ echo "# -------------------------------- #"
 mkdir /home/vagrant/downloads
 
 # Add vagrant to sudoers
-sudo echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
+sudo su
+echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
+exit
 
 # Install general dependencies
 sudo apt-get update
@@ -29,8 +31,9 @@ echo "# -------------------------------- #"
 echo "#    Installing Guest Additions    #"
 echo "# -------------------------------- #"
 
-sudo mount /dev/cdrom /media/cdrom
-cd /media/cdrom
+sudo mkdir /cdrom
+sudo mount /dev/cdrom /cdrom
+cd /cdrom
 sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
 sudo su
 ./VBoxLinuxAdditions.run
