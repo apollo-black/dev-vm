@@ -1,13 +1,13 @@
+#!/bin/bash
+
 echo "# -------------------------------- #"
 echo "#      Apollo Ruby VM Install      #"
 echo "# -------------------------------- #"
 
 mkdir /home/vagrant/downloads
 
-# Add vagrant to sudoers
 sudo su -c "echo \"vagrant ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/vagrant"
 
-# Install general dependencies
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get -y install wget ca-certificates gcc g++ gnupg2 make software-properties-common git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
@@ -77,18 +77,18 @@ echo "# -------------------------------- #"
 echo "#        Installing Java 8         #"
 echo "# -------------------------------- #"
 
-sudo apt install default-jre default-jre-headless
+sudo apt install -y default-jre default-jre-headless
 
 echo "# -------------------------------- #"
 echo "#        Installing Neo4j          #"
 echo "# -------------------------------- #"
 
-wget --no-check-certificate -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
-sudo apt update
-sudo apt install -y neo4j
-sudo service neo4j stop
-sudo service neo4j start
+# wget --no-check-certificate -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+# echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
+# sudo apt update
+# sudo apt install -y neo4j
+# sudo service neo4j stop
+# sudo service neo4j start
 
 echo "# -------------------------------- #"
 echo "#        Installing Nodejs         #"
@@ -200,11 +200,10 @@ echo "# -------------------------------- #"
 echo "#          Setting Up Utils        #"
 echo "# -------------------------------- #"
 
-cp ./utils/ngrok /usr/bin
-cp ./utils/pgweb /usr/bin
+cp /home/vagrant/utils/ngrok /usr/bin
+cp /home/vagrant/utils/pgweb /usr/bin
 
 sudo npm install -g is-up-cli
-sudo npm install -g pageres-cli
 sudo npm install -g loadtest
 
 sudo apt-get install -y htop
