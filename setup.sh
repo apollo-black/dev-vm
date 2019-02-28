@@ -5,9 +5,7 @@ echo "# -------------------------------- #"
 mkdir /home/vagrant/downloads
 
 # Add vagrant to sudoers
-sudo su
-echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
-exit
+sudo su -c "echo \"vagrant ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/vagrant"
 
 # Install general dependencies
 sudo apt-get update
@@ -35,9 +33,7 @@ sudo mkdir /cdrom
 sudo mount /dev/cdrom /cdrom
 cd /cdrom
 sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
-sudo su
-./VBoxLinuxAdditions.run
-exit
+sudo su -c "./VBoxLinuxAdditions.run"
 
 echo "# -------------------------------- #"
 echo "#         Installing Ruby          #"
