@@ -13,7 +13,7 @@ sudo apt-get upgrade -y
 sudo apt-get -y install wget ca-certificates gcc g++ gnupg2 make software-properties-common \
   git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev \
   libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip \
-  libmagick++-dev libv8-dev libffi-dev libpulse0
+  libmagick++-dev libv8-dev libffi-dev libpulse0 imagemagick
 
 echo "# -------------------------------- #"
 echo "#         Setting SSH Keys         #"
