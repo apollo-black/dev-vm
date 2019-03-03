@@ -10,7 +10,10 @@ sudo su -c "echo \"vagrant ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/vagrant"
 
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get -y install wget ca-certificates gcc g++ gnupg2 make software-properties-common git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip  libmagick++-dev libv8-dev libffi-dev libpulse0
+sudo apt-get -y install wget ca-certificates gcc g++ gnupg2 make software-properties-common \
+  git-core curl build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev libcurl4-openssl-dev \
+  libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libffi-dev libpq-dev tcl8.5 libexpat1-dev gettext unzip \
+  libmagick++-dev libv8-dev libffi-dev libpulse0
 
 echo "# -------------------------------- #"
 echo "#         Setting SSH Keys         #"
@@ -45,7 +48,7 @@ cd /home/vagrant/downloads && tar xzf ruby.tar.gz
 cd /home/vagrant/downloads/ruby-2.6.1 && ./configure -prefix=$HOME
 cd /home/vagrant/downloads/ruby-2.6.1 && make
 cd /home/vagrant/downloads/ruby-2.6.1 && make install
-gem install bundler
+# gem install bundler
 
 echo "# -------------------------------- #"
 echo "#         Installing Redis         #"
@@ -98,17 +101,12 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo apt install -y npm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-npm install --global webpack
+sudo npm install --global webpack
 
-## Run `sudo apt-get install -y nodejs` to install Node.js 10.x and npm
-## You may also need development tools to build native addons:
-     sudo apt-get install gcc g++ make
-## To install the Yarn package manager, run:
-     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-     sudo apt-get update && sudo apt-get install yarn
-
-
+sudo apt-get install gcc g++ make
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
 
 echo "# -------------------------------- #"
 echo "#        Installing Expo           #"
@@ -196,7 +194,7 @@ echo "# -------------------------------- #"
 echo "#       Installing Typescript      #"
 echo "# -------------------------------- #"
 
-sudo npm install --global typescript
+sudo npm install -g typescript
 
 echo "# -------------------------------- #"
 echo "#          Setting ENV Vars        #"
@@ -210,8 +208,8 @@ echo "# -------------------------------- #"
 echo "#          Setting Up Utils        #"
 echo "# -------------------------------- #"
 
-cp /home/vagrant/utils/ngrok /usr/bin
-cp /home/vagrant/utils/pgweb /usr/bin
+cp /home/vagrant/dev-vm/utils/ngrok /usr/bin
+cp /home/vagrant/dev-vm/utils/pgweb /usr/bin
 
 sudo npm install -g is-up-cli
 sudo npm install -g loadtest
