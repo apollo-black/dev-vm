@@ -6,20 +6,12 @@ This Virtual Machine has everything installed that we use to develop software. I
   <img height="50" src="https://onyxframework.org/img/patreon-button.svg">
 </a>
 
-## Usage
-
-Steps:
-1 Launch image with virtualbox
-2. install git
-3 clone repo
-4. run set up
-
-run: sudo mysql_secure_installation
-
+## General Usage
 
 1. Copy the `Vagrantfile` from this repository into your project root
 2. Run `vagrant up`
 
+Note: If you are using MySQL, please run `sudo mysql_secure_installation`.
 
 ## Dependencies
 
@@ -63,12 +55,14 @@ All database usernames and passwords would generally be:
 
 - [AWS CLI Tools](https://aws.amazon.com/cli/)
 - [Heroku Command Line v7.7.4](https://devcenter.heroku.com/articles/heroku-cli)
-- [Docker]()
-- [Vue CLI]()
-- [React Native CLI]()
-- [Yarn]()
-- [Expo CLI]()
-- [Tesseract]()
+- [Docker](https://www.docker.com/)
+- [Vue CLI](https://cli.vuejs.org/)
+- [React Native CLI](https://www.npmjs.com/package/react-native-cli)
+- [Yarn](https://yarnpkg.com/en/)
+- [Expo CLI](https://expo.io/tools)
+- [Tesseract](https://github.com/tesseract-ocr)
+- [Tesseract](https://github.com/tesseract-ocr)
+- [Google Cloud CLI](https://cloud.google.com/sdk/)
 
 #### Utilities
 
@@ -188,6 +182,31 @@ end
 Any number not exceeding your available host RAM will work.
 
 **Note:** Depending on what development frameworks you want to use, you'll need to fiddle with the available VRAM for your VM instance. Java and .Net(Mono), BigData or ML/AI based projects will require much more VRAM than simpler tech like PHP or Ruby.
+
+## Building a VM
+
+1. Open VirtualBox and launch a blank Ubuntu Image. The base virtual drive should be 15gb or larger.
+2. Install Git `sudo apt install git-core`
+3. Clone this repository `git clone https://github.com/apollo-black/dev-vm.git`
+4. Execute the `setup.sh` script in this repository.
+
+## Packaging a VM
+
+1. SSH into the VM and run the following:
+```
+rm ~/dev-vm
+rm ~/downloads
+cat /dev/null > ~/.bash_history && history -c && exit
+sudo dd if=/dev/zero of=/EMPTY bs=1M
+sudo rm -f /EMPTY
+```
+Head back to your host machine terminal and run the following:
+
+```
+vagrant package --base <box name> --output apollo-<BOX NAME>.box
+```
+
+Replace `<box name>` with the name of the Virtual Box instance `(ie: apollo-ruby)`. Once done, the box will be packaged in the same directory that you are currently in.
 
 ## License
 

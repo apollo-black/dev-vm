@@ -1,3 +1,6 @@
+#!/bin/sh
+
+printf "\n"
 printf "                       _ _        \n"
 printf "     /\               | | |       \n"
 printf "    /  \   _ __   ___ | | | ___   \n"
@@ -7,5 +10,5 @@ printf " /_/    \_\ .__/ \___/|_|_|\___/  \n"
 printf "          | |                     \n"
 printf "          |_|                     \n"
 printf "\n"
-printf "Docs: https://github.com/apollo-black/dev-vm"
-printf "Copyright (c) Apollo Black"
+printf " >> https://github.com/apollo-black/apollo-dev-vm\n"
+printf " >> https://apollo.black\n\n"
