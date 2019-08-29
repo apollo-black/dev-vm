@@ -15,6 +15,25 @@ The `~/app` directory inside the VM will be the root of your project.
 
 **Note**: If you are using MySQL, please run `sudo mysql_secure_installation` after provisioning the VM.
 
+Contents of the `Vagrantfile`:
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "apolloblack/dev-vm"
+  config.vm.box_check_update = false
+  config.vm.network "forwarded_port", guest: 3000, host: 3000 # rails
+  config.vm.synced_folder ".", "/vagrant_data"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+  end
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    ln -s /vagrant_data ~/app
+  SHELL
+ end
+```
+
 ## Dependencies
 
 - [VirtualBox](https://www.virtualbox.org) `tested on v5.2.16`
