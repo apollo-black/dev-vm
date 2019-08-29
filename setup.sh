@@ -82,9 +82,9 @@ echo "# -------------------------------- #"
 
 sudo apt install -y default-jre default-jre-headless
 
-echo "# -------------------------------- #"
-echo "#        Installing Neo4j          #"
-echo "# -------------------------------- #"
+#echo "# -------------------------------- #"
+#echo "#        Installing Neo4j          #"
+#echo "# -------------------------------- #"
 
 # wget --no-check-certificate -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
 # echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
@@ -109,24 +109,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update && sudo apt-get install yarn
 
 echo "# -------------------------------- #"
-echo "#        Installing Expo           #"
-echo "# -------------------------------- #"
-
-sudo npm install -g expo-cli
-
-echo "# -------------------------------- #"
-echo "#      Installing React Native     #"
-echo "# -------------------------------- #"
-
-sudo npm install -g react-native-cli
-
-echo "# -------------------------------- #"
-echo "#         Installing VueCLI        #"
-echo "# -------------------------------- #"
-
-sudo npm install -g vue-cli
-
-echo "# -------------------------------- #"
 echo "#        Installing Crystal        #"
 echo "# -------------------------------- #"
 
@@ -149,20 +131,14 @@ echo "# -------------------------------- #"
 
 sudo apt-get install -y lua5.3
 
-echo "# -------------------------------- #"
-echo "#       Installing Cassandra       #"
-echo "# -------------------------------- #"
+#echo "# -------------------------------- #"
+#echo "#       Installing Cassandra       #"
+#echo "# -------------------------------- #"
 
-echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install -y cassandra
-
-echo "# -------------------------------- #"
-echo "#         Installing MySQL         #"
-echo "# -------------------------------- #"
-
-sudo apt install -y mysql-server
+#echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+#curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+#sudo apt-get update
+#sudo apt-get install -y cassandra
 
 echo "# -------------------------------- #"
 echo "#         Installing PIP           #"
@@ -170,19 +146,19 @@ echo "# -------------------------------- #"
 
 sudo apt install -y python3-pip
 
-echo "# -------------------------------- #"
-echo "#      Installing Tensorflow       #"
-echo "# -------------------------------- #"
+#echo "# -------------------------------- #"
+#echo "#      Installing Tensorflow       #"
+#echo "# -------------------------------- #"
 
-pip3 install tensorflow
-pip3 install keras
+#pip3 install tensorflow
+#pip3 install keras
 
-echo "# -------------------------------- #"
-echo "#      Installing Tesseract        #"
-echo "# -------------------------------- #"
+#echo "# -------------------------------- #"
+#echo "#      Installing Tesseract        #"
+#echo "# -------------------------------- #"
 
-sudo apt install -y tesseract-ocr
-sudo apt install -y libtesseract-dev
+#sudo apt install -y tesseract-ocr
+#sudo apt install -y libtesseract-dev
 
 echo "# -------------------------------- #"
 echo "#         Installing FFmpeg        #"
@@ -211,23 +187,23 @@ echo "# -------------------------------- #"
 cp /home/vagrant/dev-vm/utils/ngrok /usr/bin
 cp /home/vagrant/dev-vm/utils/pgweb /usr/bin
 
-sudo npm install -g is-up-cli
-sudo npm install -g loadtest
+#sudo npm install -g is-up-cli
+#sudo npm install -g loadtest
 
 sudo apt-get install -y htop
 sudo apt-get install -y httpie
 
-echo "# -------------------------------- #"
-echo "#        Installing Docker         #"
-echo "# -------------------------------- #"
+#echo "# -------------------------------- #"
+#echo "#        Installing Docker         #"
+#echo "# -------------------------------- #"
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+#curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+#sudo apt-key fingerprint 0EBFCD88
+#sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+#sudo apt-get update
+#sudo apt-get install docker-ce docker-ce-cli containerd.io
+#sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#sudo chmod +x /usr/local/bin/docker-compose
 
 echo "# -------------------------------- #"
 echo "#         Done, Rebooting          #"
