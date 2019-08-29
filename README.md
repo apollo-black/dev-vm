@@ -1,17 +1,19 @@
 # Apollo Development VM
 
-This Virtual Machine has everything installed that we use to develop software. It's the single source of runtime that imitates the production servers that we use.
+This Virtual Machine has everything installed that we use to develop software with Ruby on Rails, Python & Golang. 
 
-<a href="https://www.patreon.com/apolloblack">
-  <img height="50" src="https://onyxframework.org/img/patreon-button.svg">
-</a>
+It's the single source of runtime that imitates the production servers to ensure that all developers have exactly the same development environments.
 
 ## General Usage
 
 1. Copy the `Vagrantfile` from this repository into your project root
-2. Run `vagrant up`
+2. Type `vagrant up`
+3. Type `vagrant ssh`
+4. Type `cd app`
 
-Note: If you are using MySQL, please run `sudo mysql_secure_installation`.
+The `~/app` directory inside the VM will be the root of your project.
+
+**Note**: If you are using MySQL, please run `sudo mysql_secure_installation` after provisioning the VM.
 
 ## Dependencies
 
@@ -61,53 +63,52 @@ All database usernames and passwords would generally be:
 - [Yarn](https://yarnpkg.com/en/)
 - [Expo CLI](https://expo.io/tools)
 - [Tesseract](https://github.com/tesseract-ocr)
-- [Tesseract](https://github.com/tesseract-ocr)
 - [Google Cloud CLI](https://cloud.google.com/sdk/)
 
 #### Utilities
 
-There are utilities installed on the machine to help make life easier:
+There are also utilities installed on the machine to help make life easier:
 
 To share your environment using [ngrok](https://ngrok.com):
 
 ```
-ngrok http 3000
+$> ngrok http 3000
 ```
 
 [is-up 1.0](https://github.com/sindresorhus/is-up-cli): Check if a website is up or down.
 
 ```
-is-up apollo.black
+$> is-up apollo.black
 ```
 
 [pageres-cli 4.1.0](https://github.com/sindresorhus/pageres-cli): Capture screenshots of websites in any resolution
 
 ```
-pageres apollo.black 1024x768
+$> pageres apollo.black 1024x768
 ```
 
 [loadtest 3.0.3](https://github.com/alexfernandez/loadtest): Perform a load test on any URL
 
 ```
-loadtest -n 100 -c 5 -k apollo.black
+$> loadtest -n 100 -c 5 -k apollo.black
 ```
 
 [pgweb 0.9.12](https://github.com/sosedoff/pgweb): Plug and play Postgresql web interface
 
 ```
-pgweb --host localhost --user app_user --db app_db
+$> pgweb --host localhost --user app_user --db app_db
 ```
 
 [htop](https://hisham.hm/htop/): Interactive unix process viewer
 
 ```
-htop
+$> htop
 ```
 
 [httpie](https://httpie.org/): Command line HTTP client
 
 ```
-http -v apollo.black
+$> http -v apollo.black
 ```
 
 ## Useful Vagrant Commands
@@ -116,42 +117,44 @@ Daily use sometimes requires that you destroy or reload virtual machines, here a
 
 ##### Launch a VM
 ```
-vagrant up
+$> vagrant up
 ```
 
 ##### Connect to VM via SSH
 ```
-vagrant ssh
+$> vagrant ssh
 ```
 
 ##### Stop a VM
 ```
-vagrant halt
+$> vagrant halt
 ```
 
 ##### Reload a VM without needing to destroy it
 ```
-vagrant reload
+$> vagrant reload
 ```
 
 ##### Destroy a VM
 ```
-vagrant destroy
+$> vagrant destroy
 ```
 
 ##### Show VM's & Statuses
 ```
-vagrant global-status
+$> vagrant global-status
 ```
+
+You can find more information about the available commands on the [Vagrant website](https://www.vagrantup.com/docs/cli/).
 
 ## Environment Variables
 
 To make life easier, we have the following ENV variables defined in `/etc/environment`:
 
 ```
-> DATABASE_URL="postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant"
-> REDIS_URL="redis://localhost:6379"
-> RAILS_ENV="development"
+$> DATABASE_URL="postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant"
+$> REDIS_URL="redis://localhost:6379"
+$> RAILS_ENV="development"
 ```
 
 You can add new ENV vars to either the `/etc/environment` file or the `~/.profile` file.
@@ -159,14 +162,15 @@ You can add new ENV vars to either the `/etc/environment` file or the `~/.profil
 If you install [Nginx](https://www.nginx.com/) and [Phusion Passenger](https://www.phusionpassenger.com/) on the VM and want to set application specific `ENV` variables, you can use [passenger_env_var](https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_env_var) directive:
 
 ```
-> passenger_env_var DATABASE_URL postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant;
-> passenger_env_var REDIS_URL redis://localhost:6379;
+$> passenger_env_var DATABASE_URL postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant;
+$> passenger_env_var REDIS_URL redis://localhost:6379;
 ```
+
 Similarly, with [Apache2](https://httpd.apache.org/), you can use the [SetEnv](https://httpd.apache.org/docs/2.4/mod/mod_env.html) directive:
 
 ```
-> SetEnv DATABASE_URL postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant
-> SetEnv REDIS_URL redis://localhost:6379
+$> SetEnv DATABASE_URL postgresql://vagrant:vagrant@127.0.0.1:5432/vagrant
+$> SetEnv REDIS_URL redis://localhost:6379
 ```
 
 ## Memory / VRAM
@@ -183,7 +187,7 @@ Any number not exceeding your available host RAM will work.
 
 **Note:** Depending on what development frameworks you want to use, you'll need to fiddle with the available VRAM for your VM instance. Java and .Net(Mono), BigData or ML/AI based projects will require much more VRAM than simpler tech like PHP or Ruby.
 
-## Building a VM
+## Building the Actual VM from Source (not recommended)
 
 1. Open VirtualBox and launch a blank Ubuntu Image. The base virtual drive should be 15gb or larger.
 2. Install Git `sudo apt install git-core`
@@ -193,17 +197,19 @@ Any number not exceeding your available host RAM will work.
 ## Packaging a VM
 
 1. SSH into the VM and run the following:
+
 ```
-rm ~/dev-vm
-rm ~/downloads
-cat /dev/null > ~/.bash_history && history -c && exit
-sudo dd if=/dev/zero of=/EMPTY bs=1M
-sudo rm -f /EMPTY
+$> rm ~/dev-vm
+$> rm ~/downloads
+$> cat /dev/null > ~/.bash_history && history -c && exit
+$> sudo dd if=/dev/zero of=/EMPTY bs=1M
+$> sudo rm -f /EMPTY
+
 ```
 Head back to your host machine terminal and run the following:
 
 ```
-vagrant package --base <box name> --output apollo-<BOX NAME>.box
+$> vagrant package --base <box name> --output apollo-<BOX NAME>.box
 ```
 
 Replace `<box name>` with the name of the Virtual Box instance `(ie: apollo-ruby)`. Once done, the box will be packaged in the same directory that you are currently in.
@@ -212,7 +218,7 @@ Replace `<box name>` with the name of the Virtual Box instance `(ie: apollo-ruby
 
 MIT License
 
-Copyright (c) 2019 Apollo Black
+Copyright (c) 2019 Apollo Black / Sean Nieuwoudt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
